@@ -3,6 +3,7 @@ import { User } from "../interfaces/user.interface";
 import UserModel from "../models/user.model";
 
 import { encrypt, verified } from "../utils/bcrypt.handle";
+import { genToken } from "../utils/jwt.handle";
 
 const checkUserAlreadyExists = async (email: string) =>
   await UserModel.findOne({ email });
@@ -26,7 +27,10 @@ const loginUser = async ({ email, password }: Auth) => {
 
   if (!isCorrect) return "INCORRECT_PASSWORD";
 
-  return checkUserAlreadyExists(email);
+  return {
+    token: genToken(userAlreadyExists["_id"]),
+    user: userAlreadyExists,
+  };
 };
 
 export { registerUser, loginUser };
