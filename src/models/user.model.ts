@@ -6,15 +6,19 @@ const UserSchema = new Schema<User>(
     name: {
       required: true,
       type: String,
+      trim: true,
     },
     password: {
       required: true,
       type: String,
+      trim: true,
     },
     email: {
       required: true,
       type: String,
       unique: true,
+      lowercase: true,
+      trim: true,
     },
     avatar: {
       required: false,
@@ -32,6 +36,6 @@ const UserSchema = new Schema<User>(
   }
 );
 
-const UserModel = model("users", UserSchema);
+const UserModel = model("User", UserSchema);
 
 export default UserModel;

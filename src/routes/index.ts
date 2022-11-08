@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { readdirSync } from "fs";
+import "./guard";
 
 const cleanFileName = (fileName: string) => fileName.split(".").shift();
 
@@ -8,7 +9,8 @@ const router = Router();
 
 readdirSync(PATH_ROUTER).forEach((filename) => {
   const cleanName = cleanFileName(filename);
-  if (cleanName !== "index") {
+  console.log(cleanName);
+  if (cleanName !== "index" && cleanName !== "guard") {
     import(`./${cleanName}.routes`).then((moduleRouter) => {
       router.use(`/${cleanName}`, moduleRouter.router);
     });

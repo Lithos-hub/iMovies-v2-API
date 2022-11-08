@@ -6,7 +6,7 @@ const checkJwt = (req: ExtendedRequest, res: Response, next: NextFunction) => {
   try {
     const jwtByUser = req.headers.authorization || "";
     const jwt = jwtByUser.split(" ").pop();
-    const isUser = verifyToken(String(jwt));
+    const isUser = verifyToken(String(jwt)) as { id: string };
     if (isUser) {
       req.user = isUser;
       next();
