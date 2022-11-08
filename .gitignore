@@ -8,6 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 **/.env
 
+storage/*
+!storage/.gitkeep
+
 node_modules
 dist
 dist-ssr
