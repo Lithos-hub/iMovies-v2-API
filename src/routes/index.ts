@@ -12,7 +12,7 @@ readdirSync(PATH_ROUTER).forEach((filename) => {
   console.log(cleanName);
   if (cleanName !== "index" && cleanName !== "guard") {
     import(`./${cleanName}.routes`).then((moduleRouter) => {
-      router.use(`/${cleanName}`, moduleRouter.router);
+      router.use(`/api/v1/${cleanName}`, moduleRouter.router);
     });
   }
 });
