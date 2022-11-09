@@ -9,7 +9,6 @@ const router = Router();
 
 readdirSync(PATH_ROUTER).forEach((filename) => {
   const cleanName = cleanFileName(filename);
-  console.log(cleanName);
   if (cleanName !== "index" && cleanName !== "guard") {
     import(`./${cleanName}.routes`).then((moduleRouter) => {
       router.use(`/api/v1/${cleanName}`, moduleRouter.router);
