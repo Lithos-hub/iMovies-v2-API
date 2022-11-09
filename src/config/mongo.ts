@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { connect } from "mongoose";
+const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const options = {
   useNewUrlParser: true,
@@ -14,5 +15,18 @@ const options = {
 async function dbConnect(): Promise<void> {
   const DB_URI = <string>process.env.DB_URI;
   await connect(DB_URI, options);
+  if (DB_URI.includes("srv")) {
+    const client = new MongoClient(DB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverApi: ServerApiVersion.v1,
+    });
+
+    client.connect(() => {
+      const collection = client.db("test").collection("devices");
+      // perform actions on the collection object
+      client.close();
+    });
+  }
 }
 export default dbConnect;
