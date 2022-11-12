@@ -1,4 +1,4 @@
-import { Schema, Types, model, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 import { User } from "../interfaces/user.interface";
 
 const UserSchema = new Schema<User>(
@@ -8,7 +8,7 @@ const UserSchema = new Schema<User>(
       type: String,
       trim: true,
     },
-    password: {
+    birthday: {
       required: true,
       type: String,
       trim: true,
@@ -20,12 +20,13 @@ const UserSchema = new Schema<User>(
       lowercase: true,
       trim: true,
     },
+    password: {
+      required: true,
+      type: String,
+      trim: true,
+    },
     avatar: {
       required: false,
-      type: String,
-    },
-    birthday: {
-      required: true,
       type: String,
     },
   },

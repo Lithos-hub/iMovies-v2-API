@@ -8,13 +8,26 @@ import { genToken } from "../utils/jwt.handle";
 const checkUserAlreadyExists = async (email: string) =>
   await UserModel.findOne({ email });
 
-const registerUser = async ({ email, password, name }: User) => {
+const registerUser = async ({
+  email,
+  password,
+  name,
+  birthday,
+  avatar = "default",
+}: User) => {
+  console.log("Creating: ", email, password, name, birthday, avatar);
   const userAlreadyExists = await checkUserAlreadyExists(email);
   if (userAlreadyExists) return "USER_ALREADY_EXISTS";
 
   const encryptedPass: string = await encrypt(password);
 
-  return await UserModel.create({ email, password: encryptedPass, name });
+  return await UserModel.create({
+    email,
+    password: encryptedPass,
+    name,
+    birthday,
+    avatar,
+  });
 };
 
 const loginUser = async ({ email, password }: Auth) => {

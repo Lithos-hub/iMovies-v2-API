@@ -4,6 +4,7 @@ import { registerUser, loginUser } from "../services/auth.service";
 
 const signUp = async ({ body }: Request, res: Response) => {
   const response = await registerUser(body);
+  console.log("Response: ", response);
   res.send(response);
 };
 
