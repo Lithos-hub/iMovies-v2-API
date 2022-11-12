@@ -3,8 +3,8 @@ import { ObjectId } from "mongodb";
 
 const JWT_SECRET = process.env.JWT_SECRET || "token.000111";
 
-const genToken = (id: ObjectId) =>
-  sign({ id }, JWT_SECRET, {
+const genToken = (_id: ObjectId) =>
+  sign({ _id }, JWT_SECRET, {
     expiresIn: "1h",
   });
 

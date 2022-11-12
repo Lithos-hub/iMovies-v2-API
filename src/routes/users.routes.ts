@@ -5,10 +5,11 @@ import {
   getUsers,
   updateUser,
 } from "../controllers/users.controller";
+import { checkJwt } from "../middlewares/session.middleware";
 
 const router = Router();
 
-router.get("/", getUsers);
+router.get("/", checkJwt, getUsers);
 router.get("/:id", getUser);
 router.put("/:id", updateUser);
 router.delete("/:id", deleteUser);

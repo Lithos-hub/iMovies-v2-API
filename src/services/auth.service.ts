@@ -12,7 +12,7 @@ const registerUser = async ({ email, password, name }: User) => {
   const userAlreadyExists = await checkUserAlreadyExists(email);
   if (userAlreadyExists) return "USER_ALREADY_EXISTS";
 
-  const encryptedPass = await encrypt(password);
+  const encryptedPass: string = await encrypt(password);
 
   return await UserModel.create({ email, password: encryptedPass, name });
 };

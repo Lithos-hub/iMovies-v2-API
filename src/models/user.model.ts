@@ -25,9 +25,8 @@ const UserSchema = new Schema<User>(
       type: String,
     },
     birthday: {
-      required: false,
+      required: true,
       type: String,
-      default: "unknown",
     },
   },
   {

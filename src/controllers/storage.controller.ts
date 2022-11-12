@@ -13,7 +13,7 @@ const getFile = async ({ user, file }: ExtendedRequest, res: Response) => {
     });
     res.send(response);
   } catch (error) {
-    handleHttp(res, "ERROR_GET_FILE", error);
+    handleHttp(res, "ERROR_GET_FILE", 500, error);
   }
 };
 export { getFile };
