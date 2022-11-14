@@ -11,7 +11,7 @@ const signUp = async ({ body }: Request, res: Response) => {
 const signIn = async ({ body }: Request, res: Response) => {
   const response = await loginUser(body);
 
-  if (response === "INCORRECT_PASSWORD") {
+  if (response === "INCORRECT_PASSWORD OR USER_NOT_FOUND") {
     res.status(403);
     res.send(response);
   } else {

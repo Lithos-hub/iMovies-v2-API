@@ -31,18 +31,16 @@ const registerUser = async ({
 
 const loginUser = async ({ email, password }: Auth) => {
   const userAlreadyExists = await checkUserAlreadyExists(email);
-  if (!userAlreadyExists) return "USER_NOT_FOUND";
-
-  const encryptedPass = userAlreadyExists.password;
-
-  const isCorrect = await verified(password, encryptedPass);
-
-  if (!isCorrect) return "INCORRECT_PASSWORD";
-
-  return {
-    token: genToken(userAlreadyExists["_id"]),
-    user: userAlreadyExists,
-  };
+  const encryptedPass = userAlreadyExists?.password || "";
+  const isCorrect = await verified(password, encryptedPass as string);
+  if (!isCorrect || !userAlreadyExists) {
+    return "INCORRECT_PASSWORD OR USER_NOT_FOUND";
+  } else {
+    return {
+      token: genToken(userAlreadyExists["_id"]),
+      user: userAlreadyExists,
+    };
+  }
 };
 
 export { registerUser, loginUser };
