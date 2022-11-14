@@ -15,7 +15,6 @@ const registerUser = async ({
   birthday,
   avatar = "default",
 }: User) => {
-  console.log("Creating: ", email, password, name, birthday, avatar);
   const userAlreadyExists = await checkUserAlreadyExists(email);
   if (userAlreadyExists) return "USER_ALREADY_EXISTS";
 

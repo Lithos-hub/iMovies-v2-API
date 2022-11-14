@@ -3,7 +3,6 @@ import { validationResult } from "express-validator/src/validation-result";
 
 const validate = (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log("Validating: ", req);
     validationResult(req).throw();
     return next();
   } catch (error: any) {
