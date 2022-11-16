@@ -28,6 +28,7 @@ const UserSchema = new Schema<User>(
     avatar: {
       required: false,
       type: String,
+      trim: true,
     },
   },
   {

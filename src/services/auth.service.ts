@@ -8,13 +8,7 @@ import { genToken } from "../utils/jwt.handle";
 const checkUserAlreadyExists = async (email: string) =>
   await UserModel.findOne({ email });
 
-const registerUser = async ({
-  email,
-  password,
-  name,
-  birthday,
-  avatar = "default",
-}: User) => {
+const registerUser = async ({ email, password, name, birthday }: User) => {
   const userAlreadyExists = await checkUserAlreadyExists(email);
   if (userAlreadyExists) return "USER_ALREADY_EXISTS";
 
@@ -25,7 +19,6 @@ const registerUser = async ({
     password: encryptedPass,
     name,
     birthday,
-    avatar,
   });
 };
 
@@ -36,9 +29,16 @@ const loginUser = async ({ email, password }: Auth) => {
   if (!isCorrect || !userAlreadyExists) {
     return "INCORRECT_PASSWORD OR USER_NOT_FOUND";
   } else {
+    const { _id, name, birthday, email, createdAt } = userAlreadyExists;
     return {
       token: genToken(userAlreadyExists["_id"]),
-      user: userAlreadyExists,
+      user: {
+        _id,
+        name,
+        birthday,
+        email,
+        createdAt,
+      },
     };
   }
 };
