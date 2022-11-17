@@ -1,7 +1,7 @@
 import { Request } from "express";
 import multer, { diskStorage } from "multer";
 
-const PATH_STORAGE = `${process.cwd()}/storage`;
+const PATH_STORAGE = `${process.cwd()}/public/storage`;
 
 const storage = diskStorage({
   destination(req: Request, file: Express.Multer.File, cb: any) {
@@ -14,6 +14,6 @@ const storage = diskStorage({
   },
 });
 
-const multerMiddleware = multer({ storage });
+const fileMiddleware = multer({ storage });
 
-export default multerMiddleware;
+export default fileMiddleware;
