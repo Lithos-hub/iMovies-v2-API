@@ -8,7 +8,7 @@ const getFile = async ({ user, file }: ExtendedRequest, res: Response) => {
   try {
     const response: Storage = await uploadFile({
       fileName: String(file?.filename),
-      idUser: String(user?.id),
+      idUser: String(user?._id),
       path: String(file?.path),
     });
     res.send(response);
