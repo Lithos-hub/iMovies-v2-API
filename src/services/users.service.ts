@@ -13,6 +13,8 @@ const getUsers = async () => {
 };
 const getUser = async (id: string) => await UserModel.findById(id);
 const updateUser = async (id: string, data: User) => {
+  console.log("UPDATING...");
+  console.log(data);
   return await UserModel.findOneAndUpdate(
     {
       _id: id,

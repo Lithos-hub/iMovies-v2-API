@@ -11,7 +11,7 @@ const router = Router();
 
 router.get("/", checkJwt, getUsers);
 router.get("/:id", getUser);
-router.put("/:id", checkJwt, updateUser);
+router.put("/:id", updateUser);
 router.delete("/:id", deleteUser);
 
 export { router };

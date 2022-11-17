@@ -19,11 +19,11 @@ const getUsers = async ({ user }: Request, res: Response) => {
     handleHttp(res, "ERROR_GET_USERS", 500, error);
   }
 };
-const updateUser = async ({ body }: Request, res: Response) => {
-  const { id, user } = body;
+const updateUser = async ({ params, body }: Request, res: Response) => {
   try {
-    const response = await UserService.updateUser(id, user);
-    res.send({ user, response });
+    const { id } = params;
+    const response = await UserService.updateUser(id, body);
+    res.send(response);
   } catch (error) {
     handleHttp(res, "ERROR_PUT_USERS", 500, error);
   }
