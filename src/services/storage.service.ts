@@ -5,4 +5,7 @@ const uploadFile = async ({ fileName, idUser, path }: Storage) => {
   return await StorageModel.create({ fileName, idUser, path });
 };
 
-export { uploadFile };
+const getFileByName = async (name: string) =>
+  await StorageModel.findOne({ fileName: name });
+
+export { uploadFile, getFileByName };

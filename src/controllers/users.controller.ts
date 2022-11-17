@@ -1,4 +1,4 @@
-import { Request, Response, Router } from "express";
+import { Request, Response } from "express";
 import handleHttp from "../utils/error.handle";
 import * as UserService from "../services/users.service";
 
