@@ -12,6 +12,12 @@ const FileSchema = new Schema<File>(
     idUser: {
       type: String,
     },
+    mimeType: {
+      type: String,
+    },
+    size: {
+      type: Number,
+    },
   },
   {
     versionKey: false,

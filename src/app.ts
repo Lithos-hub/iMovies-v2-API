@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cors from "cors";
 import db from "./config/mongo";
 import router from "./routes";
+import path from "path";
 
 // init
 const app = express();
@@ -18,6 +19,9 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+const PATH_STORAGE = `${process.cwd()}/src/public`;
+app.use(express.static(PATH_STORAGE));
 
 // routes
 app.use(router);
