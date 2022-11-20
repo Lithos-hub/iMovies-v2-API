@@ -5,7 +5,6 @@ import { uploadFile, getFileByName } from "../services/file.service";
 import handleHttp from "../utils/error.handle";
 
 const postFile = async ({ user, file }: ExtendedRequest, res: Response) => {
-  console.log("File: ", file);
   try {
     const response: File = await uploadFile({
       fileName: String(file?.filename),
@@ -14,10 +13,9 @@ const postFile = async ({ user, file }: ExtendedRequest, res: Response) => {
       mimeType: String(file?.mimetype),
       size: Number(file?.size),
     });
-    console.log("File response: ", response);
     res.send(response);
   } catch (error) {
-    handleHttp(res, "ERROR_GET_FILE", 500, error);
+    handleHttp(res, "ERROR_GET_FILE", 500);
   }
 };
 const getFile = async ({ params }: Request, res: Response) => {
@@ -26,7 +24,7 @@ const getFile = async ({ params }: Request, res: Response) => {
     const response = await getFileByName(id);
     res.send(response || "NOT_FOUND");
   } catch (error) {
-    handleHttp(res, "ERROR_GET_USER", 500, error);
+    handleHttp(res, "ERROR_GET_USER", 500);
   }
 };
 export { postFile, getFile };

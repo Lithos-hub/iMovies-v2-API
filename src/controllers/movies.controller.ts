@@ -7,7 +7,7 @@ const getMovies = async (req: Request, res: Response) => {
     const response = await MovieServices.getMovies();
     res.send(response);
   } catch (error) {
-    handleHttp(res, "ERROR_GET_MOVIES", 500, error);
+    handleHttp(res, "ERROR_GET_MOVIES", 500);
   }
 };
 const postMovie = async ({ body }: Request, res: Response) => {
@@ -15,7 +15,7 @@ const postMovie = async ({ body }: Request, res: Response) => {
     const response = await MovieServices.postMovie(body);
     res.send(response);
   } catch (error) {
-    handleHttp(res, "ERROR_POST_MOVIES", 500, error);
+    handleHttp(res, "ERROR_POST_MOVIES", 500);
   }
 };
 const updateMovie = async ({ params, body }: Request, res: Response) => {
@@ -24,7 +24,7 @@ const updateMovie = async ({ params, body }: Request, res: Response) => {
     const response = await MovieServices.updateMovie(id, body);
     res.send(response);
   } catch (error) {
-    handleHttp(res, "ERROR_PUT_MOVIES", 500, error);
+    handleHttp(res, "ERROR_PUT_MOVIES", 500);
   }
 };
 const deleteMovie = async ({ params }: Request, res: Response) => {
@@ -33,7 +33,7 @@ const deleteMovie = async ({ params }: Request, res: Response) => {
     const response = await MovieServices.deleteMovie(id);
     res.send(response);
   } catch (error) {
-    handleHttp(res, "ERROR_DELETE_MOVIES", 500, error);
+    handleHttp(res, "ERROR_DELETE_MOVIES", 500);
   }
 };
 

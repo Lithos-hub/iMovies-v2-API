@@ -1,13 +1,7 @@
 import { Response } from "express";
 
-const handleHttp = (
-  res: Response,
-  error: string,
-  status: number,
-  errorRaw?: any
-) => {
-  res.status(status);
-  res.send({ error });
+const handleHttp = (res: Response, error: string, status: number) => {
+  res.status(status).send({ error, status });
 };
 
 export default handleHttp;

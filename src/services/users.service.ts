@@ -11,7 +11,9 @@ const getUsers = async () => {
     };
   });
 };
-const getUser = async (id: string) => await UserModel.findById(id);
+const getUser = async (id: string): Promise<any> => {
+  return (await UserModel.findById(id)) || "NOT_FOUND";
+};
 const updateUser = async (id: string, data: User) => {
   return await UserModel.findOneAndUpdate(
     {

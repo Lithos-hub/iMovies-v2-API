@@ -4,7 +4,6 @@ import morgan from "morgan";
 import cors from "cors";
 import db from "./config/mongo";
 import router from "./routes";
-import path from "path";
 
 // init
 const app = express();

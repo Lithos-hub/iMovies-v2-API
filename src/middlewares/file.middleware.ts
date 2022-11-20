@@ -2,8 +2,6 @@ import multer, { diskStorage } from "multer";
 
 const PATH_STORAGE = `${process.cwd()}/src/public`;
 
-console.log("PATH STORAGE: ", PATH_STORAGE);
-
 const storage = diskStorage({
   destination(_, __, cb: any) {
     cb(null, PATH_STORAGE);

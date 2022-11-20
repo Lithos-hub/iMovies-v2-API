@@ -21,7 +21,7 @@ const checkJwt = (req: ExtendedRequest, res: Response, next: NextFunction) => {
     req.user = dataToken;
     next();
   } catch (error) {
-    handleHttp(res, "INVALID_SESSION", 401, error);
+    handleHttp(res, "INVALID_SESSION", 401);
   }
 };
 
