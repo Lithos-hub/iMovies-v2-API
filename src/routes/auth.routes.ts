@@ -7,6 +7,6 @@ const router = Router();
 
 router.post("/signup", validateSignUp, signUp);
 router.post("/signin", validateSignin, signIn);
-router.post("/session", getSession);
+router.post("/session", checkJwt, getSession);
 
 export { router };

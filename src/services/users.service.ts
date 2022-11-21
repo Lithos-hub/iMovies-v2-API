@@ -3,10 +3,10 @@ import UserModel from "../models/user.model";
 
 const getUsers = async () => {
   const response = await UserModel.find({});
-  return response.map(({ _id, birthday, name }) => {
+  return response.map(({ _id, dateOfBirth, name }) => {
     return {
       _id,
-      birthday,
+      dateOfBirth,
       name,
     };
   });

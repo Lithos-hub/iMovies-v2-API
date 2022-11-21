@@ -8,7 +8,7 @@ const UserSchema = new Schema<User>(
       type: String,
       trim: true,
     },
-    birthday: {
+    dateOfBirth: {
       required: true,
       type: String,
       trim: true,

@@ -3,7 +3,7 @@ import { Auth } from "./auth.interface";
 
 export interface User extends Auth {
   name: string;
-  birthday: string;
+  dateOfBirth: string;
   createdAt?: string;
   avatar?: string;
 }
@@ -11,7 +11,7 @@ export interface User extends Auth {
 export interface LoginUser {
   _id: ObjectId;
   name: string;
-  birthday: string;
+  dateOfBirth: string;
   email: string;
   avatar: string;
   createdAt: string;

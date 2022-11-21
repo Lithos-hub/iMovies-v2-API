@@ -6,7 +6,7 @@ export const validateSignUp = [
   check("name").exists().trim().notEmpty(),
   check("email").exists().trim().notEmpty().isEmail(),
   check("password").exists().trim().notEmpty().isLength({ min: 8 }),
-  check("birthday").exists().trim().notEmpty().isDate(),
+  check("dateOfBirth").exists().trim().notEmpty().isDate(),
   (req: Request, res: Response, next: NextFunction) => {
     validate(req, res, next);
   },

@@ -6,6 +6,7 @@ import handleHttp from "../utils/error.handle";
 
 const signUp = async ({ body }: Request, res: Response) => {
   const response = await registerUser(body);
+  console.log("USER CREATED: ", response);
   if (response === "USER_ALREADY_EXISTS") {
     handleHttp(res, "User already exists", 401);
   } else {
@@ -15,6 +16,7 @@ const signUp = async ({ body }: Request, res: Response) => {
 
 const signIn = async ({ body }: Request, res: Response) => {
   const response = await loginUser(body);
+  console.log("SIGNIN RESPONSE: ", response);
   if (response === "INCORRECT_PASSWORD OR USER_NOT_FOUND") {
     handleHttp(res, "Incorrect email or password", 401);
   } else {
