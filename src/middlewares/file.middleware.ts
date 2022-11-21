@@ -1,9 +1,9 @@
 import multer, { diskStorage } from "multer";
-
-const PATH_STORAGE = `${process.cwd()}/src/public`;
+import { ExtendedRequest } from "../interfaces/request.interface";
 
 const storage = diskStorage({
-  destination(_, __, cb: any) {
+  destination({ user }: ExtendedRequest, __, cb: any) {
+    const PATH_STORAGE = `${process.cwd()}/src/public/${user?._id}`;
     cb(null, PATH_STORAGE);
   },
   filename(_, file: Express.Multer.File, cb: any) {

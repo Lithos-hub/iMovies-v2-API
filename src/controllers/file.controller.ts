@@ -15,7 +15,7 @@ const postFile = async ({ user, file }: ExtendedRequest, res: Response) => {
     });
     res.send(response);
   } catch (error) {
-    handleHttp(res, "ERROR_GET_FILE", 500);
+    handleHttp(res, "ERROR_POST_FILE", 500);
   }
 };
 const getFile = async ({ params }: Request, res: Response) => {
@@ -24,7 +24,7 @@ const getFile = async ({ params }: Request, res: Response) => {
     const response = await getFileByName(id);
     res.send(response || "NOT_FOUND");
   } catch (error) {
-    handleHttp(res, "ERROR_GET_USER", 500);
+    handleHttp(res, "ERROR_GET_FILE", 500);
   }
 };
 export { postFile, getFile };
