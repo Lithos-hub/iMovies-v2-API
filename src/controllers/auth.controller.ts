@@ -29,8 +29,8 @@ const signIn = async ({ body }: Request, res: Response) => {
 };
 
 const getSession = async ({ body }: Request, res: Response) => {
-  const { USER_ID } = body;
-  const response = await getUser(USER_ID);
+  const { _id } = body;
+  const response = await getUser(_id);
   if (response === "NOT_FOUND") {
     handleHttp(res, "Invalid session", 401);
   } else {

@@ -1,9 +1,9 @@
 import { Auth } from "../interfaces/auth.interface";
 import { User } from "../interfaces/user.interface";
 import UserModel from "../models/user.model";
-
 import { encrypt, verified } from "../utils/bcrypt.handle";
 import { genToken } from "../utils/jwt.handle";
+import store from "store2";
 
 const checkUserAlreadyExists = async (email: string) =>
   await UserModel.findOne({ email });
@@ -31,9 +31,9 @@ const loginUser = async ({ email, password }: Auth) => {
     return "INCORRECT_PASSWORD OR USER_NOT_FOUND";
   } else {
     const { _id, name, dateOfBirth, email, createdAt } = userAlreadyExists;
-
+    store.set(String(_id), genToken(_id));
     return {
-      token: genToken(userAlreadyExists["_id"]),
+      token: genToken(_id),
       user: {
         _id,
         name,

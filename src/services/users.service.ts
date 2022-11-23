@@ -2,6 +2,7 @@ import { User } from "../interfaces/user.interface";
 import UserModel from "../models/user.model";
 import { encrypt } from "../utils/bcrypt.handle";
 import { genToken } from "../utils/jwt.handle";
+import store from "store2";
 
 const checkUserAlreadyExists = async (_id: string) =>
   await UserModel.findOne({ _id });
@@ -16,35 +17,54 @@ const getUsers = async () => {
     };
   });
 };
-const getUser = async (id: string): Promise<any> => {
-  return (await UserModel.findById(id)) || "NOT_FOUND";
+const getUser = async (_id: string): Promise<any> => {
+  const response = (await UserModel.findById(_id)) || "NOT_FOUND";
+  if (response !== "NOT_FOUND") {
+    const { _id, name, createdAt, avatar, email, dateOfBirth } = response;
+    return {
+      _id,
+      name,
+      createdAt,
+      avatar,
+      email,
+      dateOfBirth,
+    };
+  }
 };
 const updateUser = async (id: string, data: User) => {
-  let password;
-  let dataToSend = {
-    ...data,
-  };
-  if (data.password) {
-    password = await encrypt(data.password);
-    dataToSend.password = password;
-  }
-  await UserModel.findOneAndUpdate(
-    {
-      _id: id,
-    },
-    dataToSend,
-    {
-      new: true,
-    }
-  );
   const userAlreadyExists = await checkUserAlreadyExists(id);
+
   if (userAlreadyExists) {
-    const { _id, name, dateOfBirth, email, createdAt, avatar } =
-      userAlreadyExists;
-    return {
-      token: genToken(userAlreadyExists["_id"]),
-      user: {
+    const { _id } = userAlreadyExists;
+
+    let encryptedPassword;
+    let dataToSend = {
+      ...data,
+    };
+
+    if (data.password) {
+      encryptedPassword = await encrypt(data.password);
+      dataToSend.password = encryptedPassword;
+    }
+
+    const update = await UserModel.findByIdAndUpdate(
+      {
         _id,
+      },
+      dataToSend,
+      {
+        new: true,
+      }
+    );
+
+    const { name, dateOfBirth, email, createdAt, avatar } = update as User;
+
+    store.set(id, genToken(_id));
+
+    return {
+      token: genToken(_id),
+      user: {
+        _id: id,
         name,
         dateOfBirth,
         email,
@@ -52,6 +72,8 @@ const updateUser = async (id: string, data: User) => {
         avatar,
       },
     };
+  } else {
+    return "USER_NOT_FOUND";
   }
 };
 const deleteUser = async (id: string) => await UserModel.findByIdAndDelete(id);

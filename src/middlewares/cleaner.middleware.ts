@@ -12,9 +12,6 @@ const cleanImageDirectory = (
   try {
     const dir = `${process.cwd()}/src/public/${String(user?._id)}`;
 
-    console.log("DIR TO CLEAN: ", dir);
-
-    console.log("Dir files: ", fs.readdirSync(dir));
     if (fs.readdirSync(dir).length) {
       fs.readdirSync(dir).forEach((file) =>
         fs.unlinkSync(path.join(dir, file))
