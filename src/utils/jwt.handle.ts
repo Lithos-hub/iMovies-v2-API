@@ -5,7 +5,7 @@ const JWT_SECRET = process.env.JWT_SECRET as string;
 
 const genToken = (_id: ObjectId) =>
   sign({ _id }, JWT_SECRET, {
-    expiresIn: "1h",
+    expiresIn: 86400,
   });
 
 const verifyToken = (jwt: string) => verify(jwt, JWT_SECRET);

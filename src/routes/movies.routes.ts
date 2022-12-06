@@ -1,17 +1,17 @@
 import { Router } from "express";
 import {
-  getMovies,
   deleteMovie,
   postMovie,
-  updateMovie,
+  getMoviesByUserId,
 } from "../controllers/movies.controller";
-import { logMiddleware } from "../middlewares/log.middleware";
+import { checkJwt } from "../middlewares/session.middleware";
 
 const router = Router();
 
-router.get("/", logMiddleware, getMovies);
-router.put("/:id", updateMovie);
-router.post("/", postMovie);
-router.delete("/:id", deleteMovie);
+router.get("/:id", getMoviesByUserId);
+router.post("/favourite", checkJwt, postMovie);
+router.post("/wishlist", checkJwt, postMovie);
+router.delete("/favourite", checkJwt, deleteMovie);
+router.delete("/wishlist", checkJwt, deleteMovie);
 
 export { router };

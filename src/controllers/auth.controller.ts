@@ -12,9 +12,7 @@ const signUp = async ({ body }: Request, res: Response) => {
   } else {
     const { _id } = response._id;
     const dir = `${process.cwd()}/src/public/${_id}`;
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-    }
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
     res.send(response);
   }
 };

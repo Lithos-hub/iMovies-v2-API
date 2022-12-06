@@ -1,21 +1,17 @@
-import { Movie } from "../interfaces/movie.interface";
-import MovieModel from "../models/movie.model";
+import { MoviesData } from "../interfaces/movies.interface";
+import moviesModel from "../models/movies.model";
 
-const getMovies = async () => await MovieModel.find({});
-const getMovie = async (id: string) => await MovieModel.findById(id);
-const postMovie = async (movie: Movie) => await MovieModel.create(movie);
-const updateMovie = async (id: string, data: Movie) => {
-  return await MovieModel.findOneAndUpdate(
-    {
-      _id: id,
-    },
-    data,
-    {
-      new: true,
-    }
-  );
+const getMoviesByUserId = async (userId: string) =>
+  await moviesModel.find({ userId });
+
+const postMovie = async (data: MoviesData) => {
+  const userId = String(data.userId);
+  await moviesModel.create({ ...data, userId });
 };
-const deleteMovie = async (id: string) =>
-  await MovieModel.findByIdAndDelete(id);
 
-export { getMovies, getMovie, postMovie, updateMovie, deleteMovie };
+const deleteMovie = async (data: MoviesData) => {
+  const userId = String(data.userId);
+  await moviesModel.findOneAndDelete({ ...data, userId });
+};
+
+export { getMoviesByUserId, postMovie, deleteMovie };

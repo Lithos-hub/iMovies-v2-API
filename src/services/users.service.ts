@@ -2,7 +2,6 @@ import { User } from "../interfaces/user.interface";
 import UserModel from "../models/user.model";
 import { encrypt } from "../utils/bcrypt.handle";
 import { genToken } from "../utils/jwt.handle";
-import store from "store2";
 
 const checkUserAlreadyExists = async (_id: string) =>
   await UserModel.findOne({ _id });
@@ -58,8 +57,6 @@ const updateUser = async (id: string, data: User) => {
     );
 
     const { name, dateOfBirth, email, createdAt, avatar } = update as User;
-
-    store.set(id, genToken(_id));
 
     return {
       token: genToken(_id),
