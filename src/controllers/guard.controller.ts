@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { ExtendedRequest } from "../interfaces/request.interface";
 
 const getRoute = (req: ExtendedRequest, res: Response) => {
